@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Tambah Reservasi - My Dashboard{% endblock %}
+{% block active_reservation %}bg-purple-700{% endblock %}
+
+{% block content %}
+<h2 class="text-3xl font-bold mb-6">➕ Tambah Reservasi</h2>
+
+<div class="bg-white p-8 rounded-lg shadow-lg max-w-3xl">
+    <form>
+        <div class="grid grid-cols-2 gap-6 mb-6">
+            <div>
+                <label class="block text-gray-700 font-bold mb-2">Jam</label>
+                <input type="time" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+            </div>
+            <div>
+                <label class="block text-gray-700 font-bold mb-2">Tanggal</label>
+                <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2">Penanggung Jawab</label>
+            <input type="text" placeholder="Nama penanggung jawab" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2">Keterangan</label>
+            <textarea rows="5" placeholder="Masukkan keterangan reservasi..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"></textarea>
+            <p class="text-sm text-gray-500 mt-2">💡 Tip: Gunakan kata "masuk" atau "keluar" dalam keterangan untuk statistik otomatis</p>
+        </div>
+
+        <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2">Status</label>
+            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                <option>Terjadwal</option>
+                <option>Aktif</option>
+                <option>Selesai</option>
+            </select>
+        </div>
+
+        <div class="flex gap-4">
+            <button type="button" class="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-bold shadow-lg hover:shadow-xl flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                Simpan Reservasi
+            </button>
+            <a href="{{ url_for('schedule') }}" class="bg-gray-600 text-white px-8 py-3 rounded-lg hover:bg-gray-700 transition font-bold inline-block">Batal</a>
+        </div>
+    </form>
+</div>
+
+<!-- Quick Tips -->
+<div class="mt-8 bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg max-w-3xl">
+    <h4 class="font-bold text-blue-800 mb-3 flex items-center gap-2">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+        </svg>
+        Tips Pengisian Reservasi
+    </h4>
+    <ul class="text-blue-800 text-sm space-y-2">
+        <li>• Pastikan jam dan tanggal sudah benar</li>
+        <li>• Tulis nama lengkap penanggung jawab</li>
+        <li>• Keterangan harus jelas dan lengkap</li>
+        <li>• Gunakan kata kunci "masuk" atau "keluar" untuk tracking statistik</li>
+    </ul>
+</div>
+{% endblock %}

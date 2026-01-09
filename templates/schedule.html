@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Schedule - My Dashboard{% endblock %}
+{% block active_schedule %}bg-purple-600{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-6">
+    <div>
+        <h2 class="text-3xl font-bold mb-2">📅 Jadwal / Schedule</h2>
+        <p class="text-gray-600">Daftar semua jadwal dan reservasi yang tersedia</p>
+    </div>
+    <div class="flex gap-3">
+        <input type="date" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+        <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition font-semibold">
+            🔍 Filter
+        </button>
+    </div>
+</div>
+
+<!-- Table Schedule -->
+<div class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <table class="w-full">
+        <thead class="bg-purple-600 text-white">
+            <tr>
+                <th class="p-4 text-left">Jam Mulai</th>
+                <th class="p-4 text-left">Jam Selesai</th>
+                <th class="p-4 text-left">Penanggung Jawab</th>
+                <th class="p-4 text-left">Keterangan</th>
+                <th class="p-4 text-left">Tanggal</th>
+                <th class="p-4 text-left">Status</th>
+                <th class="p-4 text-left">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="border-b hover:bg-purple-50 transition">
+                <td class="p-4 font-semibold">08:00</td>
+                <td class="p-4 font-semibold">10:00</td>
+                <td class="p-4">John Doe</td>
+                <td class="p-4">Pengunjung masuk - Meeting ruang A</td>
+                <td class="p-4">2024-11-16</td>
+                <td class="p-4"><span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold">Aktif</span></td>
+                <td class="p-4">
+                    <button class="text-blue-600 hover:text-blue-800 mr-2">✏️</button>
+                    <button class="text-red-600 hover:text-red-800">🗑️</button>
+                </td>
+            </tr>
+            <tr class="border-b hover:bg-purple-50 transition">
+                <td class="p-4 font-semibold">09:30</td>
+                <td class="p-4 font-semibold">11:30</td>
+                <td class="p-4">Jane Smith</td>
+                <td class="p-4">Pengunjung keluar - Selesai meeting</td>
+                <td class="p-4">2024-11-16</td>
+                <td class="p-4"><span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-bold">Selesai</span></td>
+                <td class="p-4">
+                    <button class="text-blue-600 hover:text-blue-800 mr-2">✏️</button>
+                    <button class="text-red-600 hover:text-red-800">🗑️</button>
+                </td>
+            </tr>
+            <tr class="border-b hover:bg-purple-50 transition">
+                <td class="p-4 font-semibold">10:00</td>
+                <td class="p-4 font-semibold">12:00</td>
+                <td class="p-4">Ahmad Rizki</td>
+                <td class="p-4">Pengunjung masuk - Konsultasi</td>
+                <td class="p-4">2024-11-16</td>
+                <td class="p-4"><span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold">Aktif</span></td>
+                <td class="p-4">
+                    <button class="text-blue-600 hover:text-blue-800 mr-2">✏️</button>
+                    <button class="text-red-600 hover:text-red-800">🗑️</button>
+                </td>
+            </tr>
+            <tr class="border-b hover:bg-purple-50 transition">
+                <td class="p-4 font-semibold">11:00</td>
+                <td class="p-4 font-semibold">13:00</td>
+                <td class="p-4">Sarah Johnson</td>
+                <td class="p-4">Reservasi - Training session</td>
+                <td class="p-4">2024-11-16</td>
+                <td class="p-4"><span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-bold">Terjadwal</span></td>
+                <td class="p-4">
+                    <button class="text-blue-600 hover:text-blue-800 mr-2">✏️</button>
+                    <button class="text-red-600 hover:text-red-800">🗑️</button>
+                </td>
+            </tr>
+            <tr class="border-b hover:bg-purple-50 transition">
+                <td class="p-4 font-semibold">14:00</td>
+                <td class="p-4 font-semibold">17:00</td>
+                <td class="p-4">Michael Brown</td>
+                <td class="p-4">Pengunjung masuk - Workshop</td>
+                <td class="p-4">2024-11-16</td>
+                <td class="p-4"><span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-bold">Terjadwal</span></td>
+                <td class="p-4">
+                    <button class="text-blue-600 hover:text-blue-800 mr-2">✏️</button>
+                    <button class="text-red-600 hover:text-red-800">🗑️</button>
+                </td>
+            </tr>
+            <tr class="border-b hover:bg-purple-50 transition">
+                <td class="p-4 font-semibold">15:30</td>
+                <td class="p-4 font-semibold">17:30</td>
+                <td class="p-4">Emily Davis</td>
+                <td class="p-4">Pengunjung keluar - Selesai workshop</td>
+                <td class="p-4">2024-11-16</td>
+                <td class="p-4"><span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-xs font-bold">Selesai</span></td>
+                <td class="p-4">
+                    <button class="text-blue-600 hover:text-blue-800 mr-2">✏️</button>
+                    <button class="text-red-600 hover:text-red-800">🗑️</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+<div class="flex justify-between items-center mt-6">
+    <p class="text-gray-600">Menampilkan 1-6 dari 20 data</p>
+    <div class="flex gap-2">
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300 transition">Previous</button>
+        <button class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition">1</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">2</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">3</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition">Next</button>
+    </div>
+</div>
+{% endblock %}

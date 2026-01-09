@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Dashboard{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #sidebar, #navbar, #mainContent {
+            transition: all 0.3s ease;
+        }
+        .sidebar-text {
+            transition: opacity 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100" id="body">
+    <div class="flex">
+        <!-- SIDEBAR -->
+        <div id="sidebar" class="w-64 bg-purple-700 text-white min-h-screen shadow-2xl border-r-2 border-purple-600 fixed left-0 top-0 z-10">
+            <div class="p-4">
+                <!-- Hamburger Toggle Button (Paling Atas) -->
+                <div class="mb-4 pb-3 border-b border-purple-600">
+                    <button onclick="toggleSidebar()" class="w-full flex items-center gap-3 bg-purple-600 hover:bg-purple-500 p-3 rounded-lg transition" title="Toggle Sidebar">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <span class="sidebar-text font-semibold">Sidebar</span>
+                    </button>
+                </div>
+
+                <!-- Menu Items -->
+                <a href="{{ url_for('dashboard') }}" class="flex items-center gap-3 p-3 mb-2 rounded hover:bg-purple-600 transition {% block active_dashboard %}{% endblock %}">
+                    <span class="text-xl">🏠</span>
+                    <span class="sidebar-text">Dashboard</span>
+                </a>
+                <a href="{{ url_for('schedule') }}" class="flex items-center gap-3 p-3 mb-2 rounded hover:bg-purple-600 transition {% block active_schedule %}{% endblock %}">
+                    <span class="text-xl">📅</span>
+                    <span class="sidebar-text">Schedule</span>
+                </a>
+                <a href="{{ url_for('reservation') }}" class="flex items-center gap-3 p-3 mb-2 rounded hover:bg-purple-600 transition {% block active_reservation %}{% endblock %}">
+                    <span class="text-xl">➕</span>
+                    <span class="sidebar-text">Reservasi</span>
+                </a>
+
+                <div class="border-t border-purple-500 my-3"></div>
+                <div class="text-xs text-purple-200 px-3 mb-2 font-bold sidebar-text">ADMIN MENU</div>
+                <a href="{{ url_for('user') }}" class="flex items-center gap-3 p-3 mb-2 rounded hover:bg-purple-600 transition {% block active_user %}{% endblock %}">
+                    <span class="text-xl">👤</span>
+                    <span class="sidebar-text">User</span>
+                </a>
+                <a href="{{ url_for('add_user') }}" class="flex items-center gap-3 p-3 mb-2 rounded hover:bg-purple-600 transition {% block active_add_user %}{% endblock %}">
+                    <span class="text-xl">👥</span>
+                    <span class="sidebar-text">Tambah User</span>
+                </a>
+
+                <!-- Logout Button (Hilang saat collapsed) -->
+               <a href="{{ url_for('login') }}" id="logoutBtn" class="flex items-center gap-3 p-3 mb-2 rounded hover:bg-purple-900 transition-all duration-500 ease-in-out absolute bottom-4 w-56 bg-orange-600 opacity-100 translate-x-0">
+                   <span class="text-xl">🚪</span>
+                    <span class="sidebar-text">Logout</span>
+               </a>
+            </div>
+        </div>
+
+        <div id="rightSide" class="flex-1 ml-64">
+            <!-- NAVBAR ATAS -->
+            <nav id="navbar" class="bg-purple-500 text-white p-4 shadow-lg sticky top-0 z-20">
+                <div class="flex justify-between items-center px-4">
+                    <!-- Logo & Brand -->
+                    <div class="flex items-center gap-3">
+                        <div class="bg-white p-2 rounded-lg shadow-md">
+                            <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="text-xl font-bold">My Dashboard</div>
+                            <div class="text-xs opacity-90">Visitor Management System</div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Role, Clock, Dark Mode -->
+                    <div class="flex items-center gap-4">
+                        <!-- Role Badge -->
+                        <span class="px-3 py-1 bg-purple-600 rounded-full text-xs font-bold">admin</span>
+
+                        <!-- Clock -->
+                        <span class="flex items-center gap-1 font-semibold">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span id="clock">00:00:00</span>
+                        </span>
+
+                        <!-- Dark/Light Mode Toggle -->
+                        <button onclick="toggleDarkMode()" class="bg-purple-600 hover:bg-purple-700 p-2 rounded-lg transition" title="Toggle Dark/Light Mode">
+                            <svg id="darkModeIcon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- CONTENT AREA -->
+            <div id="mainContent" class="p-8">
+                {% block content %}{% endblock %}
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="bg-gray-800 text-white p-6" id="footer">
+                <div class="container mx-auto text-center">
+                    <p>&copy; 2024 My Dashboard. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Update Clock
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            const body = document.getElementById('body');
+            const navbar = document.getElementById('navbar');
+            const sidebar = document.getElementById('sidebar');
+            const footer = document.getElementById('footer');
+            const darkModeIcon = document.getElementById('darkModeIcon');
+
+            body.classList.toggle('bg-gray-900');
+            body.classList.toggle('text-white');
+
+            if (body.classList.contains('bg-gray-900')) {
+                // Dark Mode
+                navbar.classList.remove('bg-purple-500');
+                navbar.classList.add('bg-gray-800');
+                sidebar.classList.remove('bg-purple-700', 'border-purple-600');
+                sidebar.classList.add('bg-gray-900', 'border-gray-700');
+                footer.classList.remove('bg-gray-800');
+                footer.classList.add('bg-black');
+                darkModeIcon.innerHTML = '<path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>';
+            } else {
+                // Light Mode
+                navbar.classList.add('bg-purple-500');
+                navbar.classList.remove('bg-gray-800');
+                sidebar.classList.add('bg-purple-700', 'border-purple-600');
+                sidebar.classList.remove('bg-gray-900', 'border-gray-700');
+                footer.classList.add('bg-gray-800');
+                footer.classList.remove('bg-black');
+                darkModeIcon.innerHTML = '<path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>';
+            }
+        }
+
+        // Toggle Sidebar
+let sidebarCollapsed = false;
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const rightSide = document.getElementById('rightSide');
+    const sidebarTexts = document.querySelectorAll('.sidebar-text');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    if (!sidebarCollapsed) {
+        // === PROSES MENUTUP (COLLAPSE) ===
+
+        // 1. Hilangkan tombol logout perlahan (Fade Out & Geser Kiri)
+        logoutBtn.style.opacity = '0';
+        logoutBtn.style.transform = 'translateX(-20px)';
+
+        // 2. Sembunyikan text sidebar
+        sidebarTexts.forEach(text => {
+            text.style.opacity = '0';
+            setTimeout(() => {
+                text.style.display = 'none';
+            }, 200); // Sesuaikan dengan durasi css
+        });
+
+        // 3. Kecilkan sidebar (tunggu sebentar agar logout hilang dulu supaya tidak overlap)
+        setTimeout(() => {
+            logoutBtn.style.display = 'none'; // Benar-benar hilangkan dari layout
+
+            sidebar.style.width = '80px';
+            rightSide.style.marginLeft = '80px';
+        }, 300); // Tunggu 300ms (durasi transisi opacity tombol)
+
+    } else {
+        // === PROSES MEMBUKA (EXPAND) ===
+
+        // 1. Lebarkan sidebar terlebih dahulu
+        sidebar.style.width = '256px';
+        rightSide.style.marginLeft = '256px';
+
+        // 2. Munculkan text sidebar
+        sidebarTexts.forEach(text => {
+            text.style.display = 'inline';
+            setTimeout(() => {
+                text.style.opacity = '1';
+            }, 100);
+        });
+
+        // 3. Munculkan tombol logout dengan jeda (agar sidebar terbuka dulu)
+        logoutBtn.style.display = 'flex'; // Kembalikan ke layout (masih invisible)
+
+        // Gunakan setTimeout kecil agar browser merender "display: flex" dulu baru menjalankan transisi opacity
+        setTimeout(() => {
+            logoutBtn.style.opacity = '1';
+            logoutBtn.style.transform = 'translateX(0)';
+        }, 300); // Muncul setelah sidebar mulai lebar
+    }
+
+    sidebarCollapsed = !sidebarCollapsed;
+}
+    </script>
+</body>
+</html>
